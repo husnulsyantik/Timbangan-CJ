@@ -1,0 +1,59 @@
+@{
+Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+
+@model IList<CJTimbangan.Models.Setting>
+<div class="">
+    <div class="page-title">
+        
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>List Printer</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                    <li><a asp-controller="Code" asp-action="AddPrint"><i class="fa fa-plus"></i> Add Data</a></li>
+                </ul>
+                <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                  
+                                <th class="column-title" style="width: 10%">ID Printer</th>
+                                <th class="column-title" style="width: 10%">Type Printer</th>
+                                <th class="column-title" style="width: 10%">IP Printer</th>
+                                <th class="column-title" style="width: 10%">PATH Label</th>
+                                <th class="column-title no-link last" style="width: 10%"><span class="nobr">Action</span></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{ var odd = false; }
+                            @foreach (var item in Model){
+                            <tr class="@(odd ? "odd": "even") pointer">
+                                <td class=" ">@Html.DisplayFor(modelItem => item.id_printer)</td>
+                                <td class=" ">@Html.DisplayFor(modelItem => item.type_printer)</td>
+                                <td class=" ">@Html.DisplayFor(modelItem => item.ip_printer)</td>
+                                <td class=" ">@Html.DisplayFor(modelItem => item.path)</td>
+                                <td class=" last">
+                                    <a asp-controller="Code" asp-action="UpdatePrint" asp-route-id="@item.id">Edit</a> | 
+                                    <a asp-controller="Code" asp-action="DeletePrint" asp-route-id="@item.id">Delete</a>
+                                </td>
+                            </tr>
+                            odd = !odd;
+                            }
+                        </tbody>
+                        </table>
+                        </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

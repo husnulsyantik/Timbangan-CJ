@@ -1,0 +1,87 @@
+@{
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+
+@model ReflectionIT.Mvc.Paging.PagingList<CJTimbangan.Models.Input>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    }
+</script>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3></h3>
+        </div>
+
+
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Report")';">Summary</a></li>
+                    <li><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Detail")';">Detail Report</a></li>
+                    <li class="active"><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Reprint")';">List Reprint</a></li>
+                </ul>
+                <br>
+
+                <div class="col-md-2 col-sm- col-xs-9 form-group pull-left">
+                    <select name class="form-control" id="UrlList" onchange="doNavigate()">
+                        <option value="@Url.Action("Index", "Reprint")" >All Shift</option>
+                        <option value="@Url.Action("Index", "Shift1c")">Shift 1</option>
+                        <option value="@Url.Action("Index", "Shift2c")">Shift 2</option>
+                        <option value="@Url.Action("Index", "Shift3c")" selected>Shift 3</option>
+                    </select>
+                </div>
+                <br>
+                <br />
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+
+                                    <th class="column-title" style="width: 18%">Production Date</th>
+                                    <th class="column-title" style="width: 18%">Printing Date</th>
+                                    <th class="column-title" style="width: 12%">Product</th>
+                                    <th class="column-title" style="width: 12%">Packaging</th>
+                                    <th class="column-title" style="width: 12%">Lot Number</th>
+                                    <th class="column-title" style="width: 10%">Shift</th>
+                                    <th class="column-title" style="width: 10%">Status</th>
+                            </thead>
+
+                            <tbody>
+                                @{ var odd = false; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="@(odd ? "odd": "even") pointer">
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.tgl_produksi)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.tgl_cetak)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.barang)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.kemasan)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.lot_no)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.shift)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.status)</td>
+                                    </tr>
+                                    odd = !odd;
+                                }
+                            </tbody>
+                        </table>
+                        <nav aria-label="Input navigation example">
+                            <vc:pager paging-list="@Model" />
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

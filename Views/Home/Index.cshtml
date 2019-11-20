@@ -1,0 +1,90 @@
+﻿@{
+Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+
+@model IList<CJTimbangan.Models.Input>
+@*<script src="~/vendors/jquery/dist/jquery.min.js"></script>*@
+<script src="~/vendors/jquery/canvasjs.min.js"></script>
+<div class="">
+    <div class="page-title">
+        
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>List Scale</h2>
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content">
+                        <div class="table-responsive">
+                            <div id="chartContainer" style="height: 200px;"></div>
+
+
+                            <script type="text/javascript">
+                            </script>
+
+                        </div>
+                    </div>
+                    <div id="chartContainer" style="height: 200px;"></div>
+
+                    <script type="text/javascript">
+                        //var result = @Html.Raw(ViewBag.DataPoints);
+                        var dataPoints =[];
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme: "light2",
+                            zoomEnabled: true,
+                            animationEnabled: true,
+                            title: {
+                                text: "Report Data"
+                            },
+                            data: [
+                                {
+                                    type: "line",
+                                    xValueType : "dateTime",
+                                    xValueFormatString: "DD-MM-YYYY HH:mm:ss",
+                                    showInLegend : true,
+                                    dataPoints: dataPoints,
+                                }
+                            ]
+                        });
+
+                        $(function () {
+                            chart.render();
+
+                            setTimeout(getData, 1000);
+                        });
+                        function getData() {
+                            $.ajax({
+                                url: "home/GetRealTimeData",
+                                dataType : 'JSON',
+                                success: function (d) {
+                                    dataPoints = [];
+                                    //var xdataPoints = [];
+                                    $.each(d, function (idx, dt) {
+                                        var timeStamp = new Date(dt.tgl_cetak);
+                                        var time = { v: timeStamp, f: moment(timeStamp).format('D-M-Y HH:mm:ss') };
+                                        var val = dt.weight;
+                                        dataPoints.push({ label: dt.tgl_cetak, y: dt.weight });
+                                    })
+                                    chart.options.data[0].dataPoints = dataPoints;
+                                    chart.render();
+                                    setTimeout(getData, 1000);
+                                }
+                            });
+                            //$.get('home/GetRealTimeData', function (d) {
+                            //});
+                        }
+                    </script>
+
+
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

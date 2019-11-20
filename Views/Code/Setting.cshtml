@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+
+}
+@model CJTimbangan.Models.Setting
+
+<div class="">
+    <div class="page-title">
+
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Setting Controller Scale</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                     
+
+                        <form asp-controller="Code" asp-action="Setting" data-parsley-validate class="form-horizontal form-label-left">
+                            <div asp-validation-summary="All"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-7">
+                                    <button class="btn waves-effect waves-light btn-primary" type="button" onclick="location.href='@Url.Action("cont","Code")';">Cancel</button>
+                                    <button type="submit" align="center" class="btn waves-effect waves-light btn-success">Submit</button>
+                                </div>
+                            </div> <br />
+                            <div class="form-group">
+                                <label asp-for="id_controller" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="id_controller" value="@ViewBag.next_id" readonly="" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="id_controller"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="type_controller" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="type_controller" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="type_controller"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ip_controller" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="ip_controller" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="ip_controller"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="barang" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                    <select asp-for="barang" asp-items="@ViewBag.Barang" class="form-control col-md-7 col-xs-12"></select>
+                                    <span asp-validation-for="barang"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="lot_no" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="lot_no" required="required" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="lot_no"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="kemasan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="kemasan" required="required" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="kemasan"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="counter" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="counter" required="required" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="counter"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="tare" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="tare" required="required" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="tare"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="location" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="location" required="required" class="form-control col-md-7 col-xs-12" />
+                                    <span asp-validation-for="location"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="id_printer" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                    <select asp-for="id_printer" id="id_printer" asp-items="@ViewBag.Printer" class="form-control col-md-7 col-xs-12"></select>
+                                    <span asp-validation-for="id_printer"></span>
+                                </div>
+                            </div>
+                        
+                              
+                            <div class="form-group">
+                                <label asp-for="id_dig_scale" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                    <select asp-for="id_dig_scale" asp-items="@ViewBag.Scale" class="form-control col-md-7 col-xs-12"></select>
+                                    <span asp-validation-for="id_dig_scale"></span>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

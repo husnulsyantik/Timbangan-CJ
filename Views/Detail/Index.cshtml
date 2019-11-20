@@ -1,0 +1,216 @@
+@{
+    Layout = "~/Views/Shared/MasterLayout.cshtml";
+}
+@model PagedList.IPagedList<CJTimbangan.Models.Input>
+@using PagedList.Mvc;
+
+
+
+<script>
+    function doNavigate() {
+        //window.location.href = document.getElementById("UrlList").value;
+    }
+</script>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3></h3>
+        </div>
+
+
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Report")';">Summary</a></li>
+                    <li class="active"><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Detail")';">Detail Report</a></li>
+                    <li><a data-toggle="tab" onclick="location.href='@Url.Action("Index","Reprint")';">List Reprint</a></li>
+                </ul>
+
+                <br>
+                <!--Filter -->
+
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-1">
+                                    Date
+                                </label>
+                                <div class='col-md-3'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' id="start_date" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-1">
+                                    <p> To </p>
+                                </div>
+                                <div class='col-md-3'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker7'>
+                                            <input type='text' id="end_date" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-1">
+                                    Shift
+                                </label>
+                                <div class="col-xs-8 col-sm-10 col-md-8">
+                                    <select name class="form-control form-control" id="shift">
+                                        <option value="" selected>All Shift</option>
+                                        <option value="1">Shift 1</option>
+                                        <option value="2">Shift 2</option>
+                                        <option value="3">Shift 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-1">
+                                    <p>Product</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-10 col-md-8">
+                                    <select name class="form-control" id="product">
+                                        <option value="" selected>All Product</option>
+                                        <option value="Lysine">Lysine</option>
+                                        <option value="Cuka">Cuka</option>
+                                        @*<option value="@Url.Action("Lysine", "Report")">Shift 3</option>*@
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END Filter -->
+                <br>
+                <br />
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+
+                                    <th class="column-title" style="width: 18%">Production Date</th>
+                                    <th class="column-title" style="width: 18%">Printing Date</th>
+                                    <th class="column-title" style="width: 12%">Product</th>
+                                    <th class="column-title" style="width: 12%">Packaging</th>
+                                    <th class="column-title" style="width: 12%">Lot Number</th>
+                                    <th class="column-title" style="width: 10%">Counter</th>
+                                    <th class="column-title" style="width: 10%">Weight</th>
+                                    <th class="column-title" style="width: 10%">Status</th>
+                                    <th class="column-title" style="width: 10%">Shift</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                @{ var odd = false; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="@(odd ? "odd": "even") pointer">
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.tgl_produksi, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.tgl_cetak, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.barang, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.kemasan, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.lot_no, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.counter, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.weight, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.status, this.Model)</td>
+                                        <td class=" ">@Html.DisplayFor(modelItem => item.shift, this.Model)</td>
+                                    </tr>
+                                    odd = !odd;
+                                }
+                            </tbody>
+                        </table>
+                        <nav aria-label="Input navigation example">
+                            <vc:pager paging-list="@Model" />
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var start_date_val = "@ViewBag.start_date";
+    var end_date_val = "@ViewBag.end_date";
+    var shift_val = "@ViewBag.shift";
+    var product_val = "@ViewBag.product";
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'M-DD-YYYY',
+            useCurrent: false,
+            //autoclose: true,
+            keepOpen: false,
+        });
+        $('#datetimepicker7').datetimepicker({
+            format: 'M-DD-YYYY',
+            useCurrent: false,
+            //autoclose: true,
+            keepOpen: false,
+        });
+        $('#shift').on('change', function () {
+            reload_filter();
+        });
+        $('#product').on('change', function () {
+            reload_filter();
+        });
+        $('#start_date').on('dp.change', function () {
+            reload_filter();
+        });
+        $('#end_date').on('dp.change', function () {
+            reload_filter();
+        });
+        $('#end_date').val(end_date_val);
+        $('#start_date').val(start_date_val);
+        $('#shift').val(shift_val);
+        $('#product').val(product_val);
+    });
+
+    function reload_filter() {
+        var shift = $('#shift').val();
+        var product = $('#product').val();
+        var start_date = $('#start_date').val() || "";
+        var end_date = $('#end_date').val() || "";
+        //if (start_date != "") {
+        //    var sp_start = start_date.split("-");
+        //    start_date = sp_start[1] + '-' + sp_start[0] + '-' + sp_start[2];
+        //}
+        //if (end_date != "") {
+        //    var sp_start = end_date.split("-");
+        //    end_date = sp_start[1] + '-' + sp_start[0] + '-' + sp_start[2];
+        //}
+        var link = "Detail?start_date=" + start_date + "&end_date=" + end_date + "&shift=" + shift + "&product=" + product;
+        window.location.href = link;
+    }
+</script>

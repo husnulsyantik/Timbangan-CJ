@@ -14,7 +14,7 @@ using CJTimbangan.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CJTimbangan.Models;
-using ReflectionIT.Mvc.Paging;
+using PagedList;
 
 namespace CJTimbangan
 {

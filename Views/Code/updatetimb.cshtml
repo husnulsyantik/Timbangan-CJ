@@ -1,0 +1,52 @@
+@{
+Layout = "~/Views/Shared/MasterLayout.cshtml";
+
+}
+@model CJTimbangan.Models.Setting
+
+<div class="">
+    <div class="page-title">
+        
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Add Scale</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                       
+                        <form  asp-controller="Code" asp-action="UpdateTimb" data-parsley-validate class="form-horizontal form-label-left">
+                            <div asp-validation-summary="All"></div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-7">
+                                <button class="btn waves-effect waves-light btn-primary" type="button" onclick="location.href='@Url.Action("timb","Code")';">Cancel</button>
+                                <button type="submit" align="center" class="btn waves-effect waves-light btn-success">Submit</button>
+                                </div>
+                            </div> <br />
+                            <div class="form-group">
+                                <label asp-for="id_dig_scale" class="control-label col-md-3 col-sm-3 col-xs-12" ></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="id_dig_scale" readonly="readonly" required="required" class="form-control col-md-7 col-xs-12"/>
+                                <span asp-validation-for="id_dig_scale"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="type_dig_scale" class="control-label col-md-3 col-sm-3 col-xs-12" ></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input asp-for="type_dig_scale" required="required" class="form-control col-md-7 col-xs-12"/>
+                                <span asp-validation-for="type_dig_scale"></span>
+                                </div>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
